@@ -3,15 +3,19 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  overflow-x: hidden; /* Prevent horizontal scroll on root */
 }
 
 .app-layout {
   display: flex;
   min-height: 100vh;
+  width: 100%; /* Ensure layout takes full width */
+  overflow-x: hidden; /* Prevent horizontal scroll on layout */
 }
 
 .app-layout.sidebar-closed .main-content {
   margin-left: 0;
+  width: 100%; /* Full width when sidebar is closed */
 }
 
 .main-content {
@@ -21,6 +25,8 @@
   background-color: #f0f0f0; /* Match paper background */
   min-height: 100vh;
   transition: margin-left 0.3s ease;
+  width: calc(100% - 250px); /* Calculate width to prevent overflow */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 @media (max-width: 768px) {
@@ -29,6 +35,7 @@
   }
   .main-content {
     margin-left: 0;
+    width: 100%;
   }
 }
 

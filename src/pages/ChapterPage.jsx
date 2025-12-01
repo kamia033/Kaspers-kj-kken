@@ -42,28 +42,36 @@ function ChapterPage() {
     const loadContent = async () => {
       setLoading(true);
       try {
-        // Dynamically import all .txt files in content folder
-        const modules = import.meta.glob('../content/**/*.txt', { query: '?raw', import: 'default' });
+        // Dynamically import all .txt and .md files in content folder
+        const modules = import.meta.glob('../content/**/*.{txt,md}', { query: '?raw', import: 'default' });
         
         // Construct the expected path
         // Note: import.meta.glob keys are relative to the current file
         // But since we are in src/pages, and content is in src/content
-        // The path should be ../content/Book/Chapter/Page.txt
+        // The path should be ../content/Book/Chapter/Page.txt or .md
         
         // We need to decode URI components because URL params might be encoded
         const decodedBook = decodeURIComponent(book);
         const decodedChapter = decodeURIComponent(chapter);
         const decodedPage = decodeURIComponent(page);
         
-        const path = `../content/${decodedBook}/${decodedChapter}/${decodedPage}.txt`;
+        const txtPath = `../content/${decodedBook}/${decodedChapter}/${decodedPage}.txt`;
+        const mdPath = `../content/${decodedBook}/${decodedChapter}/${decodedPage}.md`;
         
-        if (modules[path]) {
+        let path = null;
+        if (modules[txtPath]) {
+          path = txtPath;
+        } else if (modules[mdPath]) {
+          path = mdPath;
+        }
+        
+        if (path) {
           const text = await modules[path]();
           setContent(text);
           setError(null);
         } else {
           setError('Fant ikke siden.');
-          console.error(`Could not find module at path: ${path}`);
+          console.error(`Could not find module at path: ${txtPath} or ${mdPath}`);
           console.log('Available modules:', Object.keys(modules));
         }
       } catch (err) {

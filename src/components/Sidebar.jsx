@@ -8,18 +8,18 @@ function Sidebar({ isOpen, toggleSidebar }) {
 
   useEffect(() => {
     // Load all content files to build the menu
-    // Structure: ../content/Book/Chapter/Page.txt
-    const modules = import.meta.glob('../content/**/*.txt');
+    // Structure: ../content/Book/Chapter/Page.txt or .md
+    const modules = import.meta.glob('../content/**/*.{txt,md}');
     const structure = {};
 
     for (const path in modules) {
       // Path format: ../content/Book/Chapter/Page.txt
       const parts = path.split('/');
-      const fileName = parts.pop(); // Page.txt
+      const fileName = parts.pop(); // Page.txt or Page.md
       const chapter = parts.pop(); // Chapter
       const book = parts.pop(); // Book
       
-      const pageName = fileName.replace('.txt', '');
+      const pageName = fileName.replace(/\.(txt|md)$/, '');
 
       if (!structure[book]) {
         structure[book] = {};
@@ -27,7 +27,10 @@ function Sidebar({ isOpen, toggleSidebar }) {
       if (!structure[book][chapter]) {
         structure[book][chapter] = [];
       }
-      structure[book][chapter].push(pageName);
+      // Avoid duplicates if both .txt and .md exist for the same page name (though unlikely/bad practice)
+      if (!structure[book][chapter].includes(pageName)) {
+        structure[book][chapter].push(pageName);
+      }
     }
 
     setMenuItems(structure);
