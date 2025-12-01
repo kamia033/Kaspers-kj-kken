@@ -1,0 +1,261 @@
+/* Neobrutalist Paper Theme */
+
+:root {
+  --paper-bg: #ffffff;
+  --paper-border: 3px solid #000000;
+  --paper-shadow: 8px 8px 0px 0px #000000;
+  --paper-text: #000000;
+  --accent-color: #ff7e5f;
+}
+
+.paper-container {
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace; /* Fallback to monospace for a raw feel, or use a specific font if imported */
+}
+
+.paper-sheet {
+  background-color: var(--paper-bg);
+  border: var(--paper-border);
+  box-shadow: var(--paper-shadow);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  position: relative;
+}
+
+.paper-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 3px solid #000;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+}
+
+.paper-content {
+  font-family: 'Times New Roman', Times, serif; /* Serif for the "printed" look */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--paper-text);
+}
+
+.paper-content h1, .paper-content h2, .paper-content h3 {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.paper-content h1 { font-size: 2rem; border-bottom: 2px solid #000; display: inline-block; }
+.paper-content h2 { font-size: 1.5rem; background-color: #000; color: #fff; display: inline-block; padding: 2px 8px; }
+.paper-content h3 { font-size: 1.2rem; text-decoration: underline; }
+
+.paper-content p {
+  margin-bottom: 1em;
+}
+
+.paper-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1em;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.paper-content ul li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.paper-content ul li::before {
+  content: "■";
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-size: 0.8em;
+}
+
+.paper-content ol {
+  margin-bottom: 1em;
+  padding-left: 2em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.paper-content ol li {
+  margin-bottom: 0.5em;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+.paper-content ol li::marker {
+  font-weight: 900;
+  color: #000;
+}
+
+.paper-content ol li p, .paper-content ol li span {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: normal;
+}
+
+.paper-content blockquote {
+  border-left: 5px solid #000;
+  margin: 1.5em 0;
+  padding-left: 1em;
+  font-style: italic;
+  background-color: #eee;
+  padding: 10px;
+}
+
+/* LaTeX specific adjustments if needed */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  text-align: center;
+  margin: 1em 0;
+}
+
+/* Table styles */
+.paper-content table {
+  width: auto;
+  min-width: 50%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-family: 'Courier New', Courier, monospace;
+  border: 3px solid #000;
+}
+
+.paper-content th, .paper-content td {
+  border: 2px solid #000;
+  padding: 10px;
+  text-align: left;
+}
+
+.paper-content th {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.paper-content tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+/* Loading Animation */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #000;
+  border-top: 5px solid transparent;
+  animation: spin 1s linear infinite;
+}
+
+.loader-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Table of Contents */
+.paper-toc {
+  background-color: #f9f9f9;
+  border: 2px solid #000;
+  padding: 20px;
+  margin-bottom: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+}
+
+.paper-toc h2 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.paper-toc ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.paper-toc li {
+  margin-bottom: 8px;
+}
+
+.paper-toc a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.paper-toc a:hover {
+  color: #ff7e5f;
+  text-decoration: underline;
+}
+
+.toc-level-1 { display: none; }
+
+.toc-level-2 {
+  margin-top: 15px;
+  padding-left: 0;
+}
+
+.toc-level-2 a {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.toc-level-2 a::before {
+  content: "■ ";
+  color: var(--accent-color);
+  font-size: 0.8em;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.toc-level-3 {
+  margin-left: 25px;
+  padding-left: 10px;
+  border-left: 3px solid #ccc;
+  margin-bottom: 5px;
+}
+
+.toc-level-3 a {
+  font-weight: normal;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.toc-level-3 a:hover {
+  color: #000;
+  text-decoration: underline;
+}
