@@ -27,19 +27,21 @@ $$
 
 ## **Definisjon: Varians**
 
+```formula
 La $X$ være en stokastisk variabel med mulige verdier $k_1, k_2, \dots, k_m$ og forventningsverdi $\mu$.
+
 
 Variansen til $X$ er gitt ved:
 
 $$
 \sigma^2 = \text{Var}(X) = \sum_{j=1}^{m} (k_j - \mu)^2 \cdot P(X = k_j)
 $$
-
+```
 Variansen er altså det gjennomsnittlige kvadratavviket, der hvert avvik vektes med sannsynligheten for utfallet. Jo større varians, desto større spredning i resultatene.
 
 ---
 
-## **Eksempel: Forventningsverdi**
+## **Eksempel: Terningspill med en terning**
 
 Du deltar i et terningspill hvor du kaster en terning. Innsatsen til spillet er 4kr. Gevinsten er gitt som følger:
 - Seks øyne: 8 kr.
@@ -133,34 +135,43 @@ $$
 
 ---
 
-# **Standardavvik for binomisk fordeling**
+# **Varians og standardavvik for binomisk fordeling**
 
-Når vi har en binomisk fordeling, altså $X \sim \text{Bin}(n, p)$, finnes det en enkel formel for standardavviket.
+Når vi har en binomisk fordeling, finnes det en enkel formel for varians.
 
-Vi har tidligere sett at forventningsverdien er $\mu = np$ og variansen er $\sigma^2 = np(1-p)$.
+Vi har tidligere sett at forventningsverdien  til en binomisk fordelt stokastisk variabel er $\mu = np$.
+```formula
+Variansen er for en binomisk fordelt stokastisk variabel gitt ved:
 
-Standardavviket blir da:
+$$
+\sigma^2 = np(1-p)
+$$
+Hvor $n$ er antall forsøk og $p$ er sannsynligheten for suksess i hvert forsøk.
+
+Standardavviket er dermed
 
 $$
 \sigma = \sqrt{np(1-p)}
 $$
-
+```
 ---
 
-## **Eksempel**
+## **Eksempel: Myntkast**
 
-Du kaster en mynt 100 ganger. Sannsynligheten for mynt er $p = 0{,}5$. Hvor mange ganger kan du forvente mynt, og hvor stort er standardavviket?
+Du kaster en mynt 100 ganger. Da er $X$ binomisk fordelt med $n = 100$ og $p = 0{,}5$.
 
-**Løsning:**
+### a) Hvor mange ganger kan du forvente mynt?
 
-La $X$ være antall ganger du får mynt. Da er $X \sim \text{Bin}(100, 0{,}5)$.
+La $X$ være antall ganger du får mynt. 
 
 **Forventningsverdi:**
 $$
 \mu = np = 100 \cdot 0{,}5 = 50
 $$
 
-**Standardavvik:**
+### b) Hvor stort er standardavviket?
+
+
 $$
 \sigma = \sqrt{np(1-p)} = \sqrt{100 \cdot 0{,}5 \cdot 0{,}5} = \sqrt{25} = 5
 $$

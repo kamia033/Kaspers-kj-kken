@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
-function Sidebar({ isOpen, toggleSidebar }) {
+function Sidebar({ isOpen, toggleSidebar, isDarkMode, toggleDarkMode }) {
   const location = useLocation();
   const [menuItems, setMenuItems] = useState({});
 
@@ -75,6 +75,12 @@ function Sidebar({ isOpen, toggleSidebar }) {
           </div>
         ))}
       </nav>
+
+      <div className="sidebar-footer">
+        <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+          {isDarkMode ? 'Lys modus ☀️' : 'Mørk modus 🌙'}
+        </button>
+      </div>
     </aside>
     </>
   );

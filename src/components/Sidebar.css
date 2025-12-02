@@ -129,7 +129,115 @@
   border-bottom: 2px solid #000;
 }
 
-/* Responsive adjustments */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 2px solid #000;
+}
+
+.dark-mode-toggle {
+  width: 100%;
+  padding: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 900;
+  background-color: #fff;
+  color: #000;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0px 0px #000;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-radius: 0;
+}
+
+.dark-mode-toggle:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000;
+  background-color: #f0f0f0;
+}
+
+.dark-mode-toggle:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px 0px #000;
+}
+
+/* Dark Mode Overrides */
+.dark-mode .sidebar {
+  background-color: #2d2d2d;
+  border-right-color: #bbbbbb;
+}
+
+.dark-mode .sidebar-toggle {
+  border-color: #bbbbbb;
+  box-shadow: 4px 4px 0px 0px #bbbbbb;
+}
+
+.dark-mode .sidebar-toggle.closed {
+  border-left-color: #bbbbbb;
+}
+
+.dark-mode .sidebar-logo {
+  border-color: #bbbbbb;
+  box-shadow: 4px 4px 0px 0px #bbbbbb;
+}
+
+.dark-mode .sidebar-logo:hover {
+  box-shadow: 2px 2px 0px 0px #bbbbbb;
+}
+
+.dark-mode .sidebar-link {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border-color: #bbbbbb;
+}
+
+.dark-mode .sidebar-link:hover {
+  background-color: #bbbbbb;
+  color: #222222;
+  box-shadow: 4px 4px 0px 0px rgba(187,187,187,0.2);
+}
+
+.dark-mode .sidebar-link.active {
+  background-color: #bbbbbb;
+  color: #222222;
+  box-shadow: 4px 4px 0px 0px #888;
+}
+
+.dark-mode .sidebar-section-title {
+  color: #aaa;
+  border-bottom-color: #bbbbbb;
+}
+
+.dark-mode .sidebar-chapter-title {
+  color: #e0e0e0;
+}
+
+.dark-mode .sidebar-sublink {
+  border-color: #bbbbbb;
+}
+
+.dark-mode .sidebar-footer {
+  border-top-color: #bbbbbb;
+}
+
+.dark-mode .dark-mode-toggle {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border-color: #bbbbbb;
+  box-shadow: 4px 4px 0px 0px #bbbbbb;
+}
+
+.dark-mode .dark-mode-toggle:hover {
+  background-color: #3a3a3a;
+  box-shadow: 2px 2px 0px 0px #bbbbbb;
+}
+
+.dark-mode .dark-mode-toggle:active {
+  box-shadow: 0px 0px 0px 0px #bbbbbb;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;

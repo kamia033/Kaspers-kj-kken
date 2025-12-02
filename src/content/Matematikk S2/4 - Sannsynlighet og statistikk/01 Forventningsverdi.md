@@ -9,11 +9,16 @@ Forventningsverdien forteller oss hvilket gjennomsnittlig resultat vi kan forven
 ---
 
 
-## **Definisjon: Forventningsverdi**
+```formula
+
+### Definisjon: Forventningsverdi
 
 La $X$ være en stokastisk variabel som kan ta verdiene
+
 $k_1, k_2, \ldots, k_m$
+
 med tilhørende sannsynligheter
+
 $P(X = k_1), \ldots, P(X = k_m)$.
 
 Da er forventningsverdien:
@@ -21,12 +26,13 @@ Da er forventningsverdien:
 $$
 \mu = E(X) = \sum_{j=1}^{m} k_j \cdot P(X = k_j)
 $$
+```
 
 Forventningsverdien er altså *det gjennomsnittlige utfallet*, der hvert mulig resultat er multiplisert med sannsynligheten for å inntreffe.
 
 ---
 
-## **Eksempel**
+## **Eksempel: Terningspill**
 
 Du deltar i et terningspill hvor du kaster en terning. Innsatsen til spillet er 4kr. Gevinsten er gitt som følger:
 - Seks øyne: 8 kr.
@@ -87,6 +93,20 @@ En forventningsverdi kan:
 * være negativ selv om alle enkelte utfall er positive (eller omvendt)
 * brukes til å vurdere om et spill eller et valg er “gunstig” på lang sikt
 
+---
+
+# Forventningsverdi med binomisk fordeling
+
+```formula
+
+### Forventningsverdi for binomisk fordelte variabler
+
+For stokastiske variabler som er binomisk fordelt, er forventningsverdien gitt ved
+$$
+E(X) = n \cdot p
+$$
+der $n$ er antall forsøk og $p$ er sannsynligheten for suksess i hvert forsøk.
+```
 ---
 
 ## **Hvorfor er forventningsverdi nyttig?**

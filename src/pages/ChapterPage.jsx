@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
 import GithubSlugger from 'github-slugger';
+import html2pdf from 'html2pdf.js';
 import 'katex/dist/katex.min.css';
 import '../components/PaperLayout.css';
 
@@ -14,6 +15,27 @@ function ChapterPage() {
   const [content, setContent] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const contentRef = useRef(null);
+
+  const handleDownloadPDF = () => {
+    const element = contentRef.current;
+    
+    // Calculate dimensions to create a single continuous page
+    const pixelHeight = element.scrollHeight;
+    const pixelWidth = element.offsetWidth;
+    // Convert px to mm (approx 1px = 0.264583 mm) and add margins
+    const mmHeight = (pixelHeight * 0.264583) + 20; 
+    const mmWidth = (pixelWidth * 0.264583) + 20;
+
+    const opt = {
+      margin:       10,
+      filename:     `${decodeURIComponent(page)}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'mm', format: [mmWidth, mmHeight], orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  };
 
   // Generate TOC
   const toc = useMemo(() => {
@@ -111,7 +133,7 @@ function ChapterPage() {
 
   return (
     <div className="paper-container">
-      <div className="paper-sheet">
+      <div className="paper-sheet" ref={contentRef}>
         <h1 className="paper-title">{decodeURIComponent(page)}</h1>
         
         {toc.length > 0 && (
@@ -131,9 +153,58 @@ function ChapterPage() {
           <ReactMarkdown
             remarkPlugins={[remarkMath, remarkGfm]}
             rehypePlugins={[rehypeKatex, rehypeSlug]}
+            components={{
+              img({node, ...props}) {
+                return (
+                  <img 
+                    {...props} 
+                    style={{maxWidth: '100%', height: 'auto', display: 'block', margin: '20px auto'}} 
+                    onError={(e) => {
+                      console.error("Image failed to load:", props.src);
+                      e.target.style.border = '5px solid red';
+                    }}
+                  />
+                );
+              },
+              code({node, inline, className, children, ...props}) {
+                const match = /language-(\w+)/.exec(className || '')
+                if (!inline && match && match[1] === 'formula') {
+                  return (
+                    <div className="paper-formula">
+                      <div className="paper-formula-content">
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkMath, remarkGfm]}
+                          rehypePlugins={[rehypeKatex, rehypeSlug]}
+                        >
+                          {String(children).replace(/\n$/, '')}
+                        </ReactMarkdown>
+                      </div>
+                    </div>
+                  )
+                }
+                return !inline && match ? (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                )
+              }
+            }}
           >
             {content}
           </ReactMarkdown>
+        </div>
+
+        <div className="pdf-download-section" data-html2canvas-ignore="true">
+          <button 
+            onClick={handleDownloadPDF}
+            className="pdf-download-btn"
+          >
+            Last ned som PDF ⬇️
+          </button>
         </div>
       </div>
     </div>

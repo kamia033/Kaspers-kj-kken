@@ -8,6 +8,15 @@
   --accent-color: #ff7e5f;
 }
 
+/* Dark Mode Overrides */
+.dark-mode {
+  --paper-bg: #2d2d2d;
+  --paper-border: 3px solid #bbbbbb;
+  --paper-shadow: 8px 8px 0px 0px #bbbbbb;
+  --paper-text: #e0e0e0;
+  --accent-color: #ff7e5f; /* Keep accent or change if needed */
+}
+
 .paper-container {
   background-color: #f0f0f0;
   min-height: 100vh;
@@ -114,6 +123,14 @@
   padding: 10px;
 }
 
+.paper-content img {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid #000;
+  margin: 20px auto;
+  display: block;
+}
+
 /* LaTeX specific adjustments if needed */
 .katex-display {
   overflow-x: auto;
@@ -121,6 +138,10 @@
   padding: 10px 0;
   text-align: center;
   margin: 1em 0;
+}
+
+.katex {
+  font-family: 'Times New Roman', Times, serif !important;
 }
 
 /* Table styles */
@@ -131,6 +152,42 @@
   border-collapse: collapse;
   font-family: 'Courier New', Courier, monospace;
   border: 3px solid #000;
+}
+
+/* Formula Box */
+.paper-formula {
+  border: 3px solid #000;
+  background-color: #fff;
+  padding: 25px;
+  margin: 40px 0;
+  box-shadow: 8px 8px 0px 0px var(--accent-color);
+  position: relative;
+  text-align: center; /* Center content in formula box */
+  font-family: 'Times New Roman', Times, serif; /* Ensure font matches */
+  max-width: 100%; /* Ensure it doesn't exceed container */
+}
+
+.paper-formula-content {
+  overflow-x: auto; /* Allow scrolling if content is too wide */
+  width: 100%;
+}
+
+.paper-formula::before {
+  content: "FORMEL";
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #000;
+  color: #fff;
+  padding: 2px 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.paper-formula p {
+  margin-bottom: 0; /* Remove bottom margin for the last paragraph */
 }
 
 .paper-content th, .paper-content td {
@@ -179,6 +236,42 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.pdf-download-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px solid #000;
+  text-align: center;
+}
+
+.pdf-download-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  box-shadow: 4px 4px 0px 0px var(--accent-color);
+  text-transform: uppercase;
+}
+
+.pdf-download-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--accent-color);
+}
+
+.dark-mode .pdf-download-section {
+  border-top-color: #bbbbbb;
+}
+
+.dark-mode .pdf-download-btn {
+  background-color: #bbbbbb;
+  color: #222222;
+  box-shadow: 4px 4px 0px 0px var(--accent-color);
 }
 
 /* Table of Contents */
@@ -284,4 +377,95 @@
 .toc-level-3 a:hover {
   color: #000;
   text-decoration: underline;
+}
+
+.dark-mode .paper-container,
+.dark-mode .main-content {
+  background-color: #222222;
+  color: #e0e0e0;
+}
+
+.dark-mode .paper-title {
+  color: #e0e0e0;
+  border-bottom-color: #bbbbbb;
+}
+
+.dark-mode .paper-content h1 {
+  border-bottom-color: #bbbbbb;
+}
+
+.dark-mode .paper-content h2 {
+  background-color: #bbbbbb;
+  color: #222222;
+}
+
+.dark-mode .paper-content blockquote {
+  border-left-color: #bbbbbb;
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+.dark-mode .paper-content img {
+  border-color: #bbbbbb;
+  opacity: 0.9;
+}
+
+.dark-mode .paper-content table,
+.dark-mode .paper-content th,
+.dark-mode .paper-content td {
+  border-color: #bbbbbb;
+}
+
+.dark-mode .paper-content th {
+  background-color: #bbbbbb;
+  color: #222222;
+}
+
+.dark-mode .paper-content tr:nth-child(even) {
+  background-color: #3a3a3a;
+}
+
+.dark-mode .paper-formula {
+  border-color: #bbbbbb;
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
+.dark-mode .paper-formula::before {
+  background-color: #bbbbbb;
+  color: #222222;
+}
+
+.dark-mode .paper-toc {
+  background-color: #2d2d2d;
+  border-color: #bbbbbb;
+}
+
+.dark-mode .paper-toc h2 {
+  border-bottom-color: #bbbbbb;
+}
+
+.dark-mode .paper-toc a {
+  color: #e0e0e0;
+}
+
+.dark-mode .paper-toc a:hover {
+  color: var(--accent-color);
+}
+
+.dark-mode .toc-level-3 {
+  border-left-color: #555;
+}
+
+.dark-mode .toc-level-3 a {
+  color: #ccc;
+}
+
+.dark-mode .toc-level-3 a:hover {
+  color: #fff;
+}
+
+.dark-mode .loader-spinner {
+  border-color: #bbbbbb;
+  border-top-color: transparent;
 }
