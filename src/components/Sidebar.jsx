@@ -9,7 +9,7 @@ function Sidebar({ isOpen, toggleSidebar, isDarkMode, toggleDarkMode }) {
   useEffect(() => {
     // Load all content files to build the menu
     // Structure: ../content/Book/Chapter/Page.txt or .md
-    const modules = import.meta.glob('../content/**/*.{txt,md}');
+    const modules = import.meta.glob('../content/**/*.{txt,md}', { query: '?raw', import: 'default' });
     const structure = {};
 
     for (const path in modules) {
