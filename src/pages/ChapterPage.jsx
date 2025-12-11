@@ -5,10 +5,12 @@ import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
+import rehypeRaw from 'rehype-raw';
 import GithubSlugger from 'github-slugger';
 import html2pdf from 'html2pdf.js';
 import 'katex/dist/katex.min.css';
 import '../components/PaperLayout.css';
+import ZTable from '../components/ZTable';
 
 function ChapterPage() {
   const { book, chapter, page } = useParams();
@@ -152,8 +154,14 @@ function ChapterPage() {
         <div className="paper-content">
           <ReactMarkdown
             remarkPlugins={[remarkMath, remarkGfm]}
-            rehypePlugins={[rehypeKatex, rehypeSlug]}
+            rehypePlugins={[rehypeKatex, rehypeSlug, rehypeRaw]}
             components={{
+              div({node, className, children, ...props}) {
+                if (className && className.includes('z-table')) {
+                  return <ZTable>{children}</ZTable>;
+                }
+                return <div className={className} {...props}>{children}</div>;
+              },
               img({node, ...props}) {
                 return (
                   <img 

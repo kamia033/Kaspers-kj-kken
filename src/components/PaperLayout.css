@@ -95,13 +95,11 @@
 .paper-content ol {
   margin-bottom: 1em;
   padding-left: 2em;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 .paper-content ol li {
   margin-bottom: 0.5em;
   padding-left: 5px;
-  font-weight: bold;
 }
 
 .paper-content ol li::marker {
@@ -469,3 +467,67 @@
   border-color: #bbbbbb;
   border-top-color: transparent;
 }
+
+/* Z-Table Specific Styles */
+.z-table table {
+  width: 100%;
+  font-size: 0.75rem; /* Make text smaller to fit */
+  border-collapse: collapse;
+}
+
+.z-table th, .z-table td {
+  padding: 2px 4px; /* Reduce padding */
+  text-align: center;
+  border: 1px solid #000;
+}
+
+/* Header row dark gray */
+.z-table thead tr {
+  background-color: #444;
+  color: #fff;
+}
+
+/* First column black */
+.z-table tbody td:first-child {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+/* Z-Table Search & Highlight */
+.z-search-bar {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.z-search-bar input {
+  padding: 5px 10px;
+  border: 1px solid #000;
+  font-family: inherit;
+  font-size: 1rem;
+  width: 150px;
+}
+
+.z-table .highlight-row-cell {
+  background-color: #e6f3ff !important;
+  color: #000 !important;
+}
+
+.z-table .highlight-col-cell {
+  background-color: #e6f3ff !important;
+  color: #000 !important;
+}
+
+.z-table .highlight-cell {
+  background-color: #ff7e5f !important;
+  color: #fff !important;
+  font-weight: bold;
+  border: 2px solid #000 !important;
+}
+
