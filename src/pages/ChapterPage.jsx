@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
@@ -14,10 +14,26 @@ import ZTable from '../components/ZTable';
 
 function ChapterPage() {
   const { book, chapter, page } = useParams();
+  const location = useLocation();
   const [content, setContent] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const contentRef = useRef(null);
+
+  // Scroll to hash when content loads or hash changes
+  useEffect(() => {
+    if (!loading && location.hash) {
+      // Small timeout to ensure DOM is fully rendered involves ReactMarkdown
+      const timer = setTimeout(() => {
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, location.hash, content]);
 
   const handleDownloadPDF = () => {
     const element = contentRef.current;

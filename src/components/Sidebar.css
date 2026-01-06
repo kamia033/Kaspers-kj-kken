@@ -247,3 +247,116 @@
     border-bottom: 3px solid #000;
   }
 }
+
+/* Search Styles */
+.sidebar-search {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0px 0px #000;
+  outline: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+  background-color: #fff;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  box-shadow: 2px 2px 0px 0px #000;
+  transform: translate(2px, 2px);
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-result-item {
+  display: block;
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #000;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px 0px #000;
+}
+
+.result-title {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.result-meta {
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.no-results {
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Dark Mode Search Overrides */
+.dark-mode .search-input {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border-color: #bbbbbb;
+  box-shadow: 4px 4px 0px 0px #bbbbbb;
+}
+
+.dark-mode .search-input:focus {
+  box-shadow: 2px 2px 0px 0px #bbbbbb;
+}
+
+.dark-mode .search-result-item {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border-color: #bbbbbb;
+  box-shadow: 2px 2px 0px 0px #bbbbbb;
+}
+
+.dark-mode .search-result-item:hover {
+  background-color: #3a3a3a;
+  box-shadow: 3px 3px 0px 0px #bbbbbb;
+}
+
+.dark-mode .result-meta {
+  color: #aaa;
+}
+
+.dark-mode .no-results {
+  color: #aaa;
+}
+
+
+.result-snippet {
+  font-size: 0.8rem;
+  color: #333;
+  margin-top: 4px;
+  font-family: sans-serif;
+  line-height: 1.2;
+}
+
+.dark-mode .result-snippet {
+  color: #ccc;
+}
+
