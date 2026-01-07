@@ -52,11 +52,31 @@ Dette gjør at vi kan regne ut sannsynligheter, f.eks. "Hva er sannsynligheten f
 
 ---
 
-## Binomisk tilnærming
+```formula
+### Binomisk tilnærming
 
 Anta at $X$ er binomisk fordelt. Dersom $n$ er tilstrekkelig stor, er $X$ tilnærmet normalfordelt med forventningsverdi $np$ og standardavvik $\sqrt{np(1-p)}$.
 
 $$ X \approx N(np, \sqrt{np(1-p)}) $$
+```
+
+### Eksempel: Defekte lyspærer
+
+En fabrikk produserer lyspærer, og vi vet at 5 % av pærene er defekte. En butikk kjøper inn et parti på 1000 lyspærer. Vi lar $X$ være antall defekte pærer i partiet.
+
+Vi har et binomisk forsøk med $n=1000$ og $p=0.05$.
+Forventningsverdien og standardavviket er:
+$$ \mu = 1000 \cdot 0.05 = 50 $$
+$$ \sigma = \sqrt{1000 \cdot 0.05 \cdot 0.95} = \sqrt{47.5} \approx 6.89 $$
+
+Vi bruker normaltilnærming for å finne sannsynligheten for at det er flere enn 60 defekte pærer, dvs. $P(X > 60)$.
+
+Vi standardiserer variabelen:
+$$ Z = \frac{60 - 50}{6.89} \approx 1.45 $$
+
+$$ P(X > 60) \approx P(Z > 1.45) = 1 - P(Z \le 1.45) = 1 - 0.9265 = 0.0735 $$
+
+Det er altså ca. 7.4 % sannsynlighet for at det er flere enn 60 defekte pærer.
 
 ---
 
