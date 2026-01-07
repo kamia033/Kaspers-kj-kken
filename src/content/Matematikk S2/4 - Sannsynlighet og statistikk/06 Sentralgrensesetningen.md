@@ -18,7 +18,9 @@ Fra regnereglene for forventning og varians vet vi allerede at:
 ```formula
 ### Sentralgrensesetningen
 
-Når $n$ blir stor nok, vil fordelingen til summen $S$ være tilnærmet **normalfordelt**.
+Vi lar $S = X_1 + X_2 + ... + X_n$. Når $n$ blir stor nok, vil fordelingen
+til summen $S$ være tilnærmet **normalfordelt** 
+med forventningsverdi $n\mu$ og standardavvik $\sqrt{n}\sigma$.
 
 $$ S \approx N(n\mu, \sqrt{n}\sigma) $$
 
