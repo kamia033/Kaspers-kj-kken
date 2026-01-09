@@ -206,6 +206,20 @@ function ChapterPage() {
                     </div>
                   )
                 }
+                if (!inline && match && match[1] === 'example') {
+                  return (
+                    <div className="paper-example">
+                      <div className="paper-example-content">
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkMath, remarkGfm]}
+                          rehypePlugins={[rehypeKatex, rehypeSlug]}
+                        >
+                          {String(children).replace(/\n$/, '')}
+                        </ReactMarkdown>
+                      </div>
+                    </div>
+                  )
+                }
                 return !inline && match ? (
                   <code className={className} {...props}>
                     {children}

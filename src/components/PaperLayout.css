@@ -531,3 +531,81 @@
   border: 2px solid #000 !important;
 }
 
+
+/* Example Box */
+.paper-example {
+  border: 3px solid #000;
+  background-color: #fff;
+  padding: 25px;
+  margin: 40px 0;
+  box-shadow: 8px 8px 0px 0px #2196f3;
+  position: relative;
+  text-align: left;
+  font-family: 'Times New Roman', Times, serif;
+  max-width: 100%;
+  white-space: normal; /* Override pre tag's white-space */
+}
+
+.paper-example-content {
+  width: 100%;
+}
+
+.paper-example::before {
+  content: 'EKSEMPEL';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #2196f3;
+  color: #fff;
+  padding: 2px 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.paper-example p {
+  margin-bottom: 0.5em;
+}
+
+.paper-example p:last-child {
+  margin-bottom: 0;
+}
+
+.paper-example h1, 
+.paper-example h2, 
+.paper-example h3 {
+  margin-top: 0.5em; 
+  margin-bottom: 0.5em;
+}
+
+.paper-example ul, 
+.paper-example ol {
+  margin-bottom: 0.5em;
+}
+
+.paper-example li {
+  margin-bottom: 0;
+}
+
+.paper-example li p {
+  margin: 0;
+}
+
+.paper-example .katex-display {
+  margin: 0.5em 0;
+  padding: 0;
+}
+
+.dark-mode .paper-example {
+  background-color: #0d47a1;
+  border-color: #fff;
+  box-shadow: 8px 8px 0px 0px #fff;
+  color: #fff;
+}
+
+.dark-mode .paper-example::before {
+  background: #64b5f6;
+  color: #000;
+}
+
