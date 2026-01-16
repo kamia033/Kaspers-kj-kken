@@ -46,7 +46,7 @@
 }
 
 .paper-content {
-  font-family: 'Times New Roman', Times, serif; /* Serif for the "printed" look */
+  font-family: Cambria, Georgia, 'Times New Roman', Times, serif; /* Serif for the "printed" look */
   font-size: 1.1rem;
   line-height: 1.6;
   color: var(--paper-text);
@@ -108,9 +108,10 @@
 }
 
 .paper-content ol li p, .paper-content ol li span {
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Times New Roman', Times, serif; Remove enforced font */
   font-weight: normal;
 }
+
 
 .paper-content blockquote {
   border-left: 5px solid #000;
@@ -129,6 +130,11 @@
   display: block;
 }
 
+/* Force KaTeX fonts to take precedence over any theme specificities */
+.katex, .katex * {
+  font-family: KaTeX_Main, 'Times New Roman', serif !important;
+}
+
 /* LaTeX specific adjustments if needed */
 .katex-display {
   overflow-x: auto;
@@ -138,9 +144,7 @@
   margin: 1em 0;
 }
 
-.katex {
-  font-family: 'Times New Roman', Times, serif !important;
-}
+
 
 /* Table styles */
 .paper-content table {

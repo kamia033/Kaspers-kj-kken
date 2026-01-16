@@ -8,7 +8,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeRaw from 'rehype-raw';
 import GithubSlugger from 'github-slugger';
 import html2pdf from 'html2pdf.js';
-import 'katex/dist/katex.min.css';
+// import 'katex/dist/katex.min.css'; // Using CDN in index.html instead to fix font issues
 import '../components/PaperLayout.css';
 import ZTable from '../components/ZTable';
 
