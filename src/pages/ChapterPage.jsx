@@ -125,6 +125,95 @@ function ChapterPage() {
     loadContent();
   }, [book, chapter, page]);
 
+  const customComponents = useMemo(() => {
+    const components = {
+      div({node, className, children, ...props}) {
+        if (className && className.includes('z-table')) {
+          return <ZTable>{children}</ZTable>;
+        }
+        return <div className={className} {...props}>{children}</div>;
+      },
+      pre({children}) {
+        return <>{children}</>;
+      },
+      img({node, ...props}) {
+        return (
+          <img 
+            {...props} 
+            style={{maxWidth: '100%', height: 'auto', display: 'block', margin: '20px auto'}} 
+            onError={(e) => {
+              console.error("Image failed to load:", props.src);
+              e.target.style.border = '5px solid red';
+            }}
+          />
+        );
+      },
+      code({node, inline, className, children, ...props}) {
+        const match = /language-(\w+)/.exec(className || '')
+        if (!inline && match && match[1] === 'formula') {
+          return (
+            <div className="paper-formula">
+              <div className="paper-formula-content">
+                <ReactMarkdown 
+                  remarkPlugins={[remarkMath, remarkGfm]}
+                  rehypePlugins={[rehypeKatex, rehypeSlug]}
+                  components={components}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </ReactMarkdown>
+              </div>
+            </div>
+          )
+        }
+        if (!inline && match && match[1] === 'example') {
+          return (
+            <div className="paper-example">
+              <div className="paper-example-content">
+                <ReactMarkdown 
+                  remarkPlugins={[remarkMath, remarkGfm]}
+                  rehypePlugins={[rehypeKatex, rehypeSlug]}
+                  components={components}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </ReactMarkdown>
+              </div>
+            </div>
+          )
+        }
+        if (!inline && match && match[1] === 'python') {
+          const codeLines = String(children).replace(/\n$/, '').split('\n');
+          return (
+            <div className="paper-code-block">
+              {codeLines.map((line, i) => (
+                <div key={i} className="paper-code-line">
+                  <span className="paper-code-number">{i + 1}</span>
+                  <span className="paper-code-text">{line || ' '}</span>
+                </div>
+              ))}
+            </div>
+          )
+        }
+        
+        if (inline) {
+          return (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          );
+        }
+
+        return (
+          <pre>
+            <code className={className} {...props}>
+              {children}
+            </code>
+          </pre>
+        );
+      }
+    };
+    return components;
+  }, []);
+
   if (loading) {
     return (
       <div className="paper-container">
@@ -171,66 +260,7 @@ function ChapterPage() {
           <ReactMarkdown
             remarkPlugins={[remarkMath, remarkGfm]}
             rehypePlugins={[rehypeKatex, rehypeSlug, rehypeRaw]}
-            components={{
-              div({node, className, children, ...props}) {
-                if (className && className.includes('z-table')) {
-                  return <ZTable>{children}</ZTable>;
-                }
-                return <div className={className} {...props}>{children}</div>;
-              },
-              img({node, ...props}) {
-                return (
-                  <img 
-                    {...props} 
-                    style={{maxWidth: '100%', height: 'auto', display: 'block', margin: '20px auto'}} 
-                    onError={(e) => {
-                      console.error("Image failed to load:", props.src);
-                      e.target.style.border = '5px solid red';
-                    }}
-                  />
-                );
-              },
-              code({node, inline, className, children, ...props}) {
-                const match = /language-(\w+)/.exec(className || '')
-                if (!inline && match && match[1] === 'formula') {
-                  return (
-                    <div className="paper-formula">
-                      <div className="paper-formula-content">
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkMath, remarkGfm]}
-                          rehypePlugins={[rehypeKatex, rehypeSlug]}
-                        >
-                          {String(children).replace(/\n$/, '')}
-                        </ReactMarkdown>
-                      </div>
-                    </div>
-                  )
-                }
-                if (!inline && match && match[1] === 'example') {
-                  return (
-                    <div className="paper-example">
-                      <div className="paper-example-content">
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkMath, remarkGfm]}
-                          rehypePlugins={[rehypeKatex, rehypeSlug]}
-                        >
-                          {String(children).replace(/\n$/, '')}
-                        </ReactMarkdown>
-                      </div>
-                    </div>
-                  )
-                }
-                return !inline && match ? (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                )
-              }
-            }}
+            components={customComponents}
           >
             {content}
           </ReactMarkdown>

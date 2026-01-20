@@ -252,6 +252,22 @@ En barista mener kaffen skal holde $92^\circ$C ($\sigma = 3^\circ$C).
 Du måler temperaturen i 9 kopper og finner snittet $94^\circ$C.
 1. Gir dette grunnlag for å si at kaffen er for varm? ($\alpha = 0.05$).
 
+#### Oppgave 14: Melkekartonger (Tosidig) 🌶️🌶️
+En tappemaskin skal fylle 1000 ml melk i hver kartong. Standardavviket er $\sigma = 10$ ml.
+En kontrollør tar stikkprøver av $n=25$ kartonger og finner et gjennomsnitt på $\bar{X} = 995$ ml.
+1. Sett opp hypoteser for å sjekke om maskinen fyller feil mengde (både for mye og for lite er feil).
+2. Gjennomfør testen med $\alpha = 0.05$.
+
+#### Oppgave 15: Terningkast (Tosidig binomisk) 🌶️🌶️
+Du kaster en terning 600 ganger og får "sekser" 85 ganger. Du lurer på om terningen er skjev (ujevn).
+1. Sett opp nullhypotese og alternativ hypotese.
+2. Gjennomfør en tosidig test med $\alpha = 0.05$. (Hint: Sjekk avviket fra forventet antall seksere).
+
+#### Oppgave 16: IQ-snitt (Tosidig) 🌶️🌶️
+ I befolkningen generelt er IQ normalfordelt med $\mu = 100$ og $\sigma = 15$.
+ En forsker lurer på om studenter ved et bestemt universitet skiller seg ut fra normalen (enten høyere eller lavere). Hun tester 100 tilfeldige studenter og finner et snitt på $\bar{X} = 103.5$.
+1. Er resultatet signifikant "annerledes" på 1 %-nivå ($\alpha = 0.01$)?
+
 ---
 
 ## Fasit
@@ -346,3 +362,30 @@ Du måler temperaturen i 9 kopper og finner snittet $94^\circ$C.
    $Z = \frac{94-92}{1} = 2$.
    $p = P(Z > 2) = 0.0228$.
    $0.0228 < 0.05$, forkaster $H_0$. Kaffen er signifikant varmere.
+
+**Oppgave 14 (Melkekartonger)**
+1. $H_0: \mu = 1000$, $H_1: \mu \neq 1000$.
+2. $\sigma_{\bar{X}} = \frac{10}{\sqrt{25}} = 2$.
+   $Z = \frac{995 - 1000}{2} = -2.5$.
+   $P(Z < -2.5) = 0.0062$.
+   Tosidig p-verdi: $2 \cdot 0.0062 = 0.0124$.
+   $0.0124 < 0.05$. Vi forkaster $H_0$. Maskinen fyller feil mengde.
+
+**Oppgave 15 (Terningkast)**
+1. $H_0: p = 1/6$, $H_1: p \neq 1/6$.
+2. Forventet antall: $600 \cdot \frac{1}{6} = 100$.
+   Standardavvik: $\sigma = \sqrt{600 \cdot \frac{1}{6} \cdot \frac{5}{6}} \approx 9.13$.
+   Observert: 85.
+   $Z = \frac{85 - 100}{9.13} = \frac{-15}{9.13} \approx -1.64$.
+   $P(Z < -1.64) = 0.0505$.
+   Tosidig p-verdi: $2 \cdot 0.0505 = 0.101$.
+   $0.101 > 0.05$. Vi beholder $H_0$. Avviket er ikke stort nok til å si at terningen er skjev.
+
+**Oppgave 16 (IQ-snitt)**
+1. $H_0: \mu = 100$, $H_1: \mu \neq 100$.
+   $\sigma_{\bar{X}} = \frac{15}{\sqrt{100}} = 1.5$.
+   $Z = \frac{103.5 - 100}{1.5} = 2.33$.
+   $P(Z > 2.33) = 1 - 0.9901 = 0.0099$.
+   Tosidig p-verdi: $2 \cdot 0.0099 = 0.0198$.
+   Kravet var $\alpha = 0.01$.
+   Siden $0.0198 > 0.01$, beholder vi $H_0$. Studentene skiller seg ikke signifikant ut på 1 %-nivå (men hadde gjort det på 5 %-nivå!).
