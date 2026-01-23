@@ -133,9 +133,6 @@ function ChapterPage() {
         }
         return <div className={className} {...props}>{children}</div>;
       },
-      pre({children}) {
-        return <>{children}</>;
-      },
       img({node, ...props}) {
         return (
           <img 
@@ -194,20 +191,10 @@ function ChapterPage() {
           )
         }
         
-        if (inline) {
-          return (
-            <code className={className} {...props}>
-              {children}
-            </code>
-          );
-        }
-
         return (
-          <pre>
-            <code className={className} {...props}>
-              {children}
-            </code>
-          </pre>
+          <code className={className} {...props}>
+            {children}
+          </code>
         );
       }
     };

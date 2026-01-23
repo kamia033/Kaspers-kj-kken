@@ -97,29 +97,123 @@ Hvis du øker `antall_forsok`, vil estimatet bli mer og mer nøyaktig (Takket v�
 
 ---
 
-## Simulering av normalfordeling
+## Simulering av binomiske forsøk
 
-Vi kan også simulere normalfordelte data. Hvis vi vet at høyden til rekrutter er normalfordelt med $\mu = 180$ cm og $\sigma = 6$ cm, kan vi trekke tilfeldige "rekrutter".
+Et binomisk forsøk består av $n$ uavhengige delforsøk hvor sannsynligheten for suksess $p$ er den samme hver gang. Vi kan simulere dette ved å kjøre en løkke inni en løkke, men ofte er det enklere å tenke på hvert delforsøk for seg.
+
+Datamaskinen vet ikke hva "binomisk" er, men vi kan lære den det ved å simulere ett og ett utfall.
+
+````example
+### Eksempel 3: Gjette på prøve
+
+Tenk deg en flervalgsprøve med 10 spørsmål ($n=10$). Hvert spørsmål har 4 svaralternativer, hvorav ett er riktig ($p=0.25$). Du må ha minst 6 rette for å bestå. Hva er sannsynligheten for å bestå hvis du gjetter helt tilfeldig?
+
+Her simulerer vi prøven 100 000 ganger. I hver prøve trekker vi 10 tilfeldige tall for å sjekke om vi svarer rett.
 
 ```python
 import random
 
-# Simulere 5 rekrutter
-for i in range(5):
-    hoyde = random.gauss(180, 6)
-    print(f"Rekrutt {i+1}: {hoyde:.1f} cm")
+antall_simuleringer = 100000
+bestatt = 0
+
+for i in range(antall_simuleringer):
+    poeng = 0
+    # Simulerer en prøve med 10 spørsmål
+    for sporsmal in range(10):
+        # random.random() gir et tall mellom 0 og 1.
+        # Hvis tallet er mindre enn 0.25, sier vi at vi gjettet riktig.
+        if random.random() < 0.25:
+            poeng += 1
+    
+    # Sjekker om prøven er bestått (minst 6 poeng)
+    if poeng >= 6:
+        bestatt += 1
+
+sannsynlighet = bestatt / antall_simuleringer
+print(f"Sannsynlighet for å bestå: {sannsynlighet:.4f}")
 ```
 
-Dette er nyttig for å lage datasett vi kan trene på, eller for å undersøke egenskapene til et utvalg.
+Kjører du denne, vil du se at sjansen for å bestå ved ren gjetting er veldig liten (under $2\%$).
+````
+
+---
+
+## Simulering av normalfordeling
+
+Vi kan også simulere normalfordelte data ved hjelp av funksjonen `random.gauss(mu, sigma)`. Her må vi oppgi forventningsverdi ($\mu$) og standardavvik ($\sigma$).
+
+Dette er spesielt nyttig for å finne sannsynligheter i normalfordelinger uten å måtte bruke Z-tabell eller integralregning.
+
+````example
+### Eksempel 4: Rekrutthøyder
+
+Anta at høyden til rekrutter er normalfordelt med $\mu = 180$ cm og $\sigma = 6$ cm. Hva er sannsynligheten for at en tilfeldig valgt rekrutt er høyere enn 190 cm?
+
+```python
+import random
+
+antall_forsok = 100000
+hoye_rekrutter = 0
+
+mu = 180
+sigma = 6
+
+for i in range(antall_forsok):
+    # Trekker en tilfeldig høyde fra normalfordelingen
+    hoyde = random.gauss(mu, sigma)
+    
+    if hoyde > 190:
+        hoye_rekrutter += 1
+
+sannsynlighet = hoye_rekrutter / antall_forsok
+print(f"Sannsynlighet for høyde > 190 cm: {sannsynlighet:.4f}")
+```
+````
+
+### Hvorfor simulere normalfordeling?
+
+Selv om vi kan regne ut dette eksakt, lar simulering oss svare på mer kompliserte spørsmål enkelt. For eksempel: "Hva er sannsynligheten for at gjennomsnittshøyden av 10 rekrutter er over 185 cm?". Dette krever mer avansert matematikk å regne ut for hånd (Sentralgrensesetningen), men i programmering er det bare å legge til en liten løkke som trekker 10 stykker og regner snittet.
 
 ```formula
 ### Oppsummering - Simulering
 
 1.  **Importer random:** `import random`
-2.  **Lag en løkke:** `for i in range(antall):`
-3.  **Utfør forsøket:** Bruk `randint`, `uniform` eller `choice`.
-4.  **Telle opp:** Bruk `if`-setninger for å sjekke om utfallet var det du så etter.
-5.  **Beregn frekvens:** $\frac{\text{Antall suksesser}}{\text{Totalt antall forsøk}}$.
+2.  **Definer modellen:** Bestem deg for `randint` (terning), `random < p` (binomisk) eller `gauss` (normal).
+3.  **Lag en løkke:** `for i in range(mange_ganger):`
+4.  **Utfør forsøket:** Simuler ett "scenario" (ett terningkast, én prøve, én person).
+5.  **Telle opp:** Sjekk om resultatet oppfylte kravet ditt, og øk telleren.
+6.  **Beregn relativ frekvens:** $\frac{\text{Antall gunstige}}{\text{Antall simuleringer}}$.
 
-Denne oppskriften kan brukes på nesten alle sannsynlighetsoppgaver!
+Denne oppskriften kan brukes på nesten alle sannsynlighetsoppgaver i S2!
 ```
+
+---
+
+## Oppgaver
+
+### Oppgave 1: Yatzy
+I spillet Yatzy kaster man 5 terninger. "Yatzy" betyr at alle 5 terningene viser samme antall øyne (f.eks. fem 6-ere).
+Lag et program som simulerer 100 000 kast med 5 terninger, og beregner sannsynligheten for å få Yatzy på ett kast.
+
+*Hint: Du kan lage en liste med 5 terninger, f.eks. `[random.randint(1, 6) for _ in range(5)]`, og sjekke om alle er like.*
+
+### Oppgave 2: Straffespark (Binomisk)
+En fotballspiller scorer mål på 80 % av straffesparkene sine ($p=0.8$).
+Bruk simulering til å finne sannsynligheten for at spilleren scorer på **minst 9 av 10** straffespark.
+
+### Oppgave 3: Lakseoppdrett (Normalfordeling)
+Vekten på laks i et oppdrettsanlegg er normalfordelt med forventningsverdi $\mu = 4.5$ kg og standardavvik $\sigma = 0.8$ kg.
+Simuler en trekning av 50 000 laks.
+a) Finn sannsynligheten for at en tilfeldig laks veier mer enn 6 kg.
+b) Finn sannsynligheten for at en tilfeldig laks veier mellom 4 kg og 5 kg.
+
+<details>
+<summary>Fasit</summary>
+
+*   **Oppgave 1:** $P(\text{Yatzy}) \approx 0.00077$ (Teoretisk: $\frac{1}{1296}$)
+*   **Oppgave 2:** $P(X \geq 9) \approx 0.376$ ($37.6 \ \%$)
+*   **Oppgave 3a:** $P(X > 6) \approx 0.030$ ($3.0 \ \%$)
+*   **Oppgave 3b:** $P(4 < X < 5) \approx 0.468$ ($46.8 \ \%$)
+
+</details>
+
